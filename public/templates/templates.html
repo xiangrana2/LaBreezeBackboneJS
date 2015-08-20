@@ -1,0 +1,13 @@
+<!-- basic user template with captions rollover-->
+ <script type="text/template" id="caption-user-tmpl">
+  <div class="col-lg-4 col-sm-6 col-xs-12">
+    <a href=""><img src="<%= images.standard_resolution.url %>" class="thumbnail img-responsive"/> </a> 
+    <!-- description div -->  
+    <div class='description'>  
+        <!-- description content -->  
+        <div class='description_content'><% if (caption != null) { %> <%= caption.text %> <% } else {%> <%= user.full_name %> <%}%></div>  
+        <!-- end description content -->    
+    </div>
+    <!-- end description div -->  
+  </div>
+</script>
