@@ -1,8 +1,19 @@
 // load html templates usinf ajax
+$('#logout-btn').hide();
 $('#templates').load('templates/templates.html', function() {
     // kick off the app once all the external templates have loaded.  
     LaBreeze.insta = new LaBreeze.Views.InstaView(); // instance of the InstaView class
     Backbone.history.start("/insta-gallery/");
+});
+
+$('#logout-btn').click(function() {
+	LaBreeze.Helpers.eraseCookie('access_token');
+	LaBreeze.settings.accesstoken = null;
+	window.location = "http://localhost:3000/";
+});
+$( "#search-tag" ).submit(function( event ) {
+    var query = $("#search").val();
+	LaBreeze.router.navigate("/tagsearch/" + query, {trigger: true});
 });
 
 LaBreeze.Views.InstaView = Backbone.View.extend({ 
@@ -11,16 +22,12 @@ LaBreeze.Views.InstaView = Backbone.View.extend({
 		this.cookiecheck();
 	},
 	render: function(){
-		if (LaBreeze.settings.accesstoken){		
-			if (!this.header_auth) {
-				this.header_auth = new LaBreeze.Views.MenuAuth(); // show full menu
-			}
+		if (LaBreeze.settings.accesstoken){	
+			$('#login-btn').hide();
+			$('#logout-btn').show();
 			return true;
 		} else {
 			console.log("not logged in");
-			if (!this.header_noauth) {
-				this.header_noauth = new LaBreeze.Views.MenuDefault(); // display log in menu
-			}
 			return false;
 		}; 	
 	},
