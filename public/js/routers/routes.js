@@ -29,10 +29,7 @@ LaBreeze.Routers.Routes = Backbone.Router.extend({
 		},
 		
 		popular: function(){
-			if (LaBreeze.insta.render()){// returns true if user is logged in.
-				LaBreeze.Main.display("media/popular");
-			}
-				
+				LaBreeze.Main.display("media/popular");			
 		},
 
 		feed: function() {
