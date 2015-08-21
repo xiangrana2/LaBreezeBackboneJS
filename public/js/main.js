@@ -1,5 +1,4 @@
 // load html templates usinf ajax
-$('#logout-btn').hide();
 $('#templates').load('templates/templates.html', function() {
     // kick off the app once all the external templates have loaded.  
     LaBreeze.insta = new LaBreeze.Views.InstaView(); // instance of the InstaView class
@@ -9,7 +8,7 @@ $('#templates').load('templates/templates.html', function() {
 $('#logout-btn').click(function() {
 	LaBreeze.Helpers.eraseCookie('access_token');
 	LaBreeze.settings.accesstoken = null;
-	window.location = "http://localhost:3000/";
+	window.location = "/";
 });
 $( "#search-tag" ).submit(function( event ) {
     var query = $("#search").val();
