@@ -55,62 +55,48 @@ LaBreeze.Helpers = {
 			return null;
 		}
 	},
-	
-	
-	
+
 	timeConverter : function (UNIX_timestamp){
-	 var a = new Date(UNIX_timestamp*1000);
-	 var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-		 var year = a.getFullYear();
-		 var month = months[a.getMonth()];
-		 var date = a.getDate();
-		 var hour = a.getHours();
-		 var min = a.getMinutes();
-		 var sec = a.getSeconds();
-		 var time = date+','+month+' '+year+' '+hour+':'+min+':'+sec ;
-		 return time;
-	 },
+		var a = new Date(UNIX_timestamp*1000);
+		var months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+		var year = a.getFullYear();
+		var month = months[a.getMonth()];
+		var date = a.getDate();
+		var hour = a.getHours();
+		var min = a.getMinutes();
+		var sec = a.getSeconds();
+		var time = date+','+month+' '+year+' '+hour+':'+min+':'+sec ;
+		return time;
+	},	
 	
-	
-	geoLookup: function(address) {
-		
+	geoLookup: function(address) {		
 			// var latlng = new google.maps.LatLng();
 			var geocoder = new google.maps.Geocoder();
 			geocoder.geocode({ 'address': address}, function(results, status) {
-			  if (status == google.maps.GeocoderStatus.OK) {
-				  
-				  var lat = results[0].geometry.location.Oa;
-				  var lng = results[0].geometry.location.Pa;
-					  
-				  var latlng =  "lat=" + lat + "&lng=" + lng;
-				  LaBreeze.settings.latlng = latlng;
-				  LaBreeze.Main.display("locations");
-	
-			  } else {
-				console.log ("Geocoder failed due to: " + status);
-			  } 
-			 });
-	
-	},
-	
-	reverseGeo: function (location) {
+				if (status == google.maps.GeocoderStatus.OK) {
+					var lat = results[0].geometry.location.Oa;
+					var lng = results[0].geometry.location.Pa;
+					var latlng =  "lat=" + lat + "&lng=" + lng;
+					LaBreeze.settings.latlng = latlng;
+					LaBreeze.Main.display("locations");
+				} else {
+					console.log ("Geocoder failed due to: " + status);
+				} 
+			});
+		},
+		reverseGeo: function (location) {
 			var lat = location.latitude;
 			var lng = location.longitude;
 			var latlng = new google.maps.LatLng(lat, lng);
 			var geocoder = new google.maps.Geocoder();
 			geocoder.geocode({'latLng': latlng}, function(results, status) {
-			  if (status == google.maps.GeocoderStatus.OK) {
-				  var address = results[0].formatted_address;
-				  
-				    LaBreeze.settings.address = address;
+				if (status == google.maps.GeocoderStatus.OK) {
+					var address = results[0].formatted_address;
+					LaBreeze.settings.address = address;
 					LaBreeze.views.mediadetail.render(); // render the media detail view again once address data is ready
-	
-			  } else {
-				console.log ("Geocoder failed due to: " + status);
-			  } 
-			 });
-	
-	}
-
-};
-
+				} else {
+					console.log ("Geocoder failed due to: " + status);
+				} 
+			});
+		}
+	};
