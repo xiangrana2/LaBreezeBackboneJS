@@ -16,7 +16,7 @@ window.views = {};
 window.collections = {};
 
 // misc
-LaBreeze.settings = {clientid:'f845412977be4bfc9c0656d4774696a5'};
+LaBreeze.settings = {clientid:'17c79bfeb983457bab2cda336214d714'};
 
 // helper functions
 LaBreeze.Helpers = {
